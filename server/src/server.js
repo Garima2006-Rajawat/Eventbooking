@@ -4,17 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 require('dotenv').config();
-const mysql = require("mysql2");
-
-const db = mysql.createConnection(process.env.DATABASE_URL);
-
-db.connect((err) => {
-  if (err) {
-    console.error("❌ MySQL Connection Failed:", err.message);
-  } else {
-    console.log("✅ MySQL Connected Successfully");
-  }
-});
+require('./config/db.js'); 
 
 const eventRoutes = require('./routes/eventRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
