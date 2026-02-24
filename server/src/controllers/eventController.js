@@ -2,10 +2,15 @@ const Event = require('../models/eventModel');
 
 exports.createEvent = async (req, res) => {
   try {
-    const eventData = req.body;
+    const eventData = { ...req.body };
 
     if (!eventData.title || !eventData.date || !eventData.total_seats) {
       return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    // Format date to YYYY-MM-DD
+    if (eventData.date) {
+      eventData.date = new Date(eventData.date).toISOString().split('T')[0];
     }
 
     eventData.available_seats = eventData.total_seats;
@@ -43,7 +48,18 @@ exports.getEventById = async (req, res) => {
 
 exports.updateEvent = async (req, res) => {
   try {
-    const result = await Event.updateEvent(req.params.id, req.body);
+    const data = { ...req.body };
+    
+    // Format date to YYYY-MM-DD if it exists
+    if (data.date) {
+      data.date = new Date(data.date).toISOString().split('T')[0];
+    }
+    
+    // Remove fields that shouldn't be updated
+    delete data.id;
+    delete data.created_at;
+    
+    const result = await Event.updateEvent(req.params.id, data);
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: 'Event not found' });
     }
