@@ -22,7 +22,14 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
 
 const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+    
+    // Allow all Vercel preview URLs
+    if (origin.includes('.vercel.app')) return callback(null, true);
+    
+    // Check against allowed origins list
+    if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
@@ -37,7 +44,13 @@ const corsOptions = {
 const { Server } = require('socket.io');
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      if (!origin || origin.includes('.vercel.app') || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: ['GET', 'POST'],
     credentials: true
   }
