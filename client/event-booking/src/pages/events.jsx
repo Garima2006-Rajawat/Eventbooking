@@ -121,11 +121,11 @@ export default function EventList() {
                 <div className="relative overflow-hidden rounded-2xl bg-black border border-purple-500/20 hover:border-purple-500/50 transition-all duration-500">
                   {/* Image */}
                   <div className="aspect-video overflow-hidden relative">
-                    {(event.image || event.img) ? (
+                    {(event.image_url || event.image || event.img) ? (
                       <motion.img
                         whileHover={{ scale: 1.1 }}
                         transition={{ duration: 0.6 }}
-                        src={event.image || event.img}
+                        src={event.image_url || event.image || event.img}
                         alt={event.title}
                         className="w-full h-full object-cover"
                       />
@@ -151,7 +151,7 @@ export default function EventList() {
                       </div>
                       <div className="flex items-center gap-2 text-sm text-gray-400">
                         <MapPin size={16} className="text-purple-400" />
-                        <span>{event.location}</span>
+                        <span>{event.venue}</span>
                       </div>
                     </div>
 
