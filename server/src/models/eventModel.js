@@ -9,9 +9,9 @@ exports.getAllEvents = async (filters) => {
   let query = 'SELECT * FROM events WHERE 1=1';
   const params = [];
 
-  if (filters.location) {
-    query += ' AND location LIKE ?';
-    params.push(`%${filters.location}%`);
+  if (filters.venue) {
+    query += ' AND venue LIKE ?';
+    params.push(`%${filters.venue}%`);
   }
 
   if (filters.date) {

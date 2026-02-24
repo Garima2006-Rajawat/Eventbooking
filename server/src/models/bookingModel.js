@@ -61,10 +61,10 @@ exports.createBooking = async (bookingData) => {
 
 exports.getAllBookings = async () => {
   const [rows] = await db.query(`
-    SELECT b.*, e.title, e.location, e.date 
+    SELECT b.*, e.title, e.venue, e.date 
     FROM bookings b
     JOIN events e ON b.event_id = e.id
-    ORDER BY b.booking_date DESC
+    ORDER BY b.created_at DESC
   `);
 
   return rows;
