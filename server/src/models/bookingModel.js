@@ -42,8 +42,8 @@ exports.createBooking = async (bookingData) => {
     // 3. Create booking
     const [result] = await conn.query(
       `INSERT INTO bookings 
-       (event_id, name, email, mobile, quantity, total_amount, status) 
-       VALUES (?, ?, ?, ?, ?, ?, 'confirmed')`,
+       (event_id, user_name, email, phone, quantity, total_amount) 
+       VALUES (?, ?, ?, ?, ?, ?)`,
       [event_id, name, email, mobile, quantity, total_amount]
     );
 
