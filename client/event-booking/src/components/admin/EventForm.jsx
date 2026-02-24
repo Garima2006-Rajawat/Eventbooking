@@ -4,11 +4,11 @@ import { createEvent, updateEvent } from "../../api/eventApi";
 const initialState = {
   title: "",
   description: "",
-  location: "",
+  venue: "",
   date: "",
   price: "",
   total_seats: "",
-  img: ""
+  image_url: ""
 };
 
 export default function EventForm({ selected, refresh, setSelected }) {
@@ -41,7 +41,7 @@ export default function EventForm({ selected, refresh, setSelected }) {
       </h2>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-        {["title", "location", "date", "price", "total_seats", "img"].map(field => (
+        {["title", "venue", "date", "price", "total_seats", "image_url"].map(field => (
           <input
             key={field}
             name={field}
