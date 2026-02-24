@@ -6,6 +6,7 @@ const initialState = {
   description: "",
   venue: "",
   date: "",
+  time: "",
   price: "",
   total_seats: "",
   image_url: ""
@@ -41,10 +42,11 @@ export default function EventForm({ selected, refresh, setSelected }) {
       </h2>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-        {["title", "venue", "date", "price", "total_seats", "image_url"].map(field => (
+        {["title", "venue", "date", "time", "price", "total_seats", "image_url"].map(field => (
           <input
             key={field}
             name={field}
+            type={field === 'date' ? 'date' : field === 'time' ? 'time' : 'text'}
             value={form[field]}
             onChange={handleChange}
             placeholder={field.replace("_", " ")}
