@@ -13,6 +13,11 @@ exports.createEvent = async (req, res) => {
       eventData.date = new Date(eventData.date).toISOString().split('T')[0];
     }
 
+    // Set default time if not provided
+    if (!eventData.time) {
+      eventData.time = '10:00:00';
+    }
+
     eventData.available_seats = eventData.total_seats;
 
     const result = await Event.createEvent(eventData);
