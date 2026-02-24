@@ -8,11 +8,15 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
   port: Number(process.env.DB_PORT),   // 🔥 important cast
   ssl: {
-    rejectUnauthorized: false
+    rejectUnauthorized: false,
+    
   },
   waitForConnections: true,
-  connectionLimit: 20,
-  queueLimit: 0
+  connectionLimit: 10,
+  queueLimit: 0,
+
+  enableKeepAlive: true,
+  keepAliveInitialDelay: 0
 });
 
 // Test DB connection
