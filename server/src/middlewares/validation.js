@@ -1,7 +1,7 @@
 const validateBooking = (req, res, next) => {
   const { event_id, name, email, mobile, quantity } = req.body;
 
-  if (!event_id || !name || !email || !mobile || !quantity) {
+  if (!event_id || !name || !email || !quantity) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
@@ -9,7 +9,8 @@ const validateBooking = (req, res, next) => {
     return res.status(400).json({ error: 'Invalid email format' });
   }
 
-  if (!/^\d{10}$/.test(mobile.replace(/\D/g, ''))) {
+  // Mobile is optional, but if provided, validate it
+  if (mobile && !/^\d{10,15}$/.test(mobile.replace(/\D/g, ''))) {
     return res.status(400).json({ error: 'Invalid mobile number' });
   }
 
