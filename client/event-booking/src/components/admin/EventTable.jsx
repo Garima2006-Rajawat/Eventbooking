@@ -16,7 +16,7 @@ export default function EventTable({ events, refresh, setSelected }) {
         <thead>
           <tr className="border-b border-white/10">
             <th className="p-2 text-left">Title</th>
-            <th>Location</th>
+            <th>Venue</th>
             <th>Date</th>
             <th>Seats</th>
             <th>Actions</th>
@@ -27,7 +27,7 @@ export default function EventTable({ events, refresh, setSelected }) {
           {events.map(e => (
             <tr key={e.id} className="border-b border-white/5">
               <td className="p-2">{e.title}</td>
-              <td>{e.location}</td>
+              <td>{e.venue}</td>
               <td>{new Date(e.date).toLocaleDateString()}</td>
               <td>{e.total_seats}</td>
 
